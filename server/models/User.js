@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrype from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 
 const userSchema = new mongoose.Schema({
@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unque: true,
+        unique: true,
     },
     password: {
         type: String,
@@ -25,11 +25,10 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 });
 
-userSchema.pre('save', async function(next){
-    if(!this.isModified("password")) return next()
+userSchema.pre('save', async function(){
+    if(!this.isModified("password")) return;
     const salt = await bcrypt.genSalt(10)
-    this.password = await bcrype.hash(this.password, salt);
-    next()
+    this.password = await bcrypt.hash(this.password, salt);
 })
 
 userSchema.methods.matchPassword = async function(enteredPassword) {

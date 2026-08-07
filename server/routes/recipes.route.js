@@ -1,5 +1,6 @@
 import express, {Router} from 'express';
 import Recipe from '../models/Recipe.js';
+import User from '../models/User.js';
 import { protect } from '../middlewares/auth.middleware.js';
 
 const recipeRouter = Router();
@@ -22,7 +23,8 @@ recipeRouter.post('/', protect, async(req,res) => {
             instructions, 
             category, 
             photoUrl, 
-            cookingTime
+            cookingTime,
+            createdBy: req.user._id
         })
 
         res.status(201).json({
@@ -133,6 +135,7 @@ recipeRouter.delete('/:id', protect, async (req, res) => {
             success: true, message: "Recipe deleted"
         })
     } catch (e) {
+        res.status(500).json({ success: false, message: "Server error" });
 
     }
 }) 

@@ -10,7 +10,7 @@ authRouter.post('/register', async(req,res) => {
 
     try {
         if(!username || !email || !password){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "Please enter required fields"
             })
@@ -24,7 +24,11 @@ authRouter.post('/register', async(req,res) => {
             })
         }
 
-        const user = await User.create({username, email, password})
+        const user = await User.create({
+            username, 
+            email, 
+            password
+        })
 
         const token = generateToken(user._id )
 
@@ -52,12 +56,14 @@ authRouter.post('/login', async (req, res) => {
 
     try {
         const user = await User.findOne({email});
-        if(!user || !(await user.matchPassowrd(password))){
+        if(!user || !(await user.matchPassword(password))){
             return res.status(401).json({
                 sucess: false,
                 message: "Invalid Credentials"
             })
         }
+
+        
 
         const token = generateToken(user._id)
 
