@@ -11,18 +11,16 @@ const Navbar = () => {
             </Link>
             <div className="flex gap-x-4">
                 <Link to="/favorites">
-                    <button>Favorites</button>
+                    <button className="cursor-pointer">Favorites</button>
                 </Link>
 
                 <Link to="/login">
-                    <button>Login</button>
+                    <button className="cursor-pointer">Login</button>
                 </Link>
 
                 <Link to="/register">
-                    <button>Register</button>
-                </Link>
-                
-                
+                    <button className="cursor-pointer">Register</button>
+                </Link>  
             </div>
         </div>
     </nav>

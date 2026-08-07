@@ -1,6 +1,6 @@
 import express, {Router} from 'express';
-import Recipe from '../models/Recipe';
-import { protect } from '../middlewares/auth.middleware';
+import Recipe from '../models/Recipe.js';
+import { protect } from '../middlewares/auth.middleware.js';
 
 const recipeRouter = Router();
 
@@ -140,7 +140,7 @@ recipeRouter.delete('/:id', protect, async (req, res) => {
 
 // ADD AND DELETE FAVOURITES RECIPE
 
-recipeRoute.post('/:id/favorite', protect, async(req, res) => {
+recipeRouter.post('/:id/favorite', protect, async(req, res) => {
     try {
         const recipeId = req.params.id;
         const recipe = await Recipe.findById(recipeId);
