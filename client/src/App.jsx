@@ -5,6 +5,7 @@ import { Home } from "./pages/Home"
 import { Favorites } from "./pages/Favorites"
 import { Login } from "./pages/Login"
 import { Register } from "./pages/Register"
+import { AddRecipe } from "./pages/AddRecipe"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/favorites" element={ <Favorites /> }/>
       <Route path="/login" element={ <Login /> }/>
       <Route path="/register" element={ <Register /> }/>
+      <Route path="/add-recipe" element={ <AddRecipe /> }/>
     </Routes>
     <h1>Mern Recipe App</h1>
     </AuthProvider>
