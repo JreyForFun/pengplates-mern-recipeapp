@@ -16,17 +16,23 @@ const Navbar = () => {
                 <h1>Recipes</h1>
             </Link>
             <div className="flex gap-x-4">
-                <Link to="/favorites">
-                    <button className="cursor-pointer">Favorites</button>
-                </Link>
-
+                {user ? (
+                    <>
+                    <Link to="/favorites">
+                        <button className="cursor-pointer">Favorites</button>
+                    </Link>
+                    <button className="cursor-pointer" onClick={handleLogout}>Logout</button>
+                    </>
+                ) : (
+                    <>
                 <Link to="/login">
                     <button className="cursor-pointer">Login</button>
                 </Link>
-
                 <Link to="/register">
                     <button className="cursor-pointer">Register</button>
-                </Link>  
+                </Link>
+                </>
+                )} 
             </div>
         </div>
     </nav>
