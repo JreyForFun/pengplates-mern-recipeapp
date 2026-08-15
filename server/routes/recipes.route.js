@@ -149,7 +149,7 @@ recipeRouter.post('/:id/favorite', protect, async(req, res) => {
         const recipe = await Recipe.findById(recipeId);
         if (!recipe) return res.status(404).json({ success: false, message: "Recipe not found" });
     
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user._id);
         if (!user) return res.status(404).json({ success: false, message: "User not found" });
     
         // Prevent duplicates
@@ -169,7 +169,7 @@ recipeRouter.post('/:id/favorite', protect, async(req, res) => {
 recipeRouter.delete("/:id/favorite", protect, async (req, res) => {
     try {
       const recipeId = req.params.id;
-      const user = await User.findById(req.user.id);
+      const user = await User.findById(req.user._id);
       if (!user) return res.status(404).json({ success: false, message: "User not found" });
   
       const index = user.favorites.indexOf(recipeId);
