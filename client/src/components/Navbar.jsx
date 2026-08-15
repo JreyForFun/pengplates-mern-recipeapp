@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-    const {user, logout} = useContext(AuthContext());
+    const {user, logout} = useContext(AuthContext);
+
+    const navigate = useNavigate();
     const handleLogout = () => {
         logout();
         navigate('/login');
@@ -18,6 +20,9 @@ const Navbar = () => {
             <div className="flex gap-x-4">
                 {user ? (
                     <>
+                    <Link to="/add-recipe">
+                        <button className="cursor-pointer">Add Recipe</button>
+                    </Link>
                     <Link to="/favorites">
                         <button className="cursor-pointer">Favorites</button>
                     </Link>
